@@ -67,7 +67,8 @@
                 <a href="#step10" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 10: Projeto Laravel</a>
                 <a href="#step11" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 11: Laravel Sail</a>
                 <a href="#step12" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 12: VS Code</a>
-                <a href="#step13" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Final: Alias do Sail</a>
+                <a href="#step13" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 13: Editar via SFTP no VSCode</a>
+                <a href="#step14" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Final: Alias do Sail</a>
             </nav>
         </aside>
 
@@ -405,6 +406,83 @@ php artisan sail:install</code></pre>
                 </section>
 
                 <section id="step13">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 13: Tutorial: Editar Ficheiros via FTP/SFTP no VS Code</h2>
+                    <p class="mb-6 text-slate-700">Trabalhar diretamente em ficheiros num servidor remoto a partir do Visual Studio Code é uma das formas mais eficientes de desenvolver para a web.</p>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 1: Instalação da Extensão Correta</h3>
+                            <p class="mt-1 mb-4 text-slate-600">A extensão "SFTP" mais popular (do autor liximomo) foi descontinuada. Este tutorial utiliza a sua sucessora, publicada pelo autor <strong>Natizyskunk</strong>.</p>
+                            <ol class="list-decimal list-inside text-slate-600 space-y-2">
+                                <li>Abra o VS Code e aceda à vista de Extensões (Ctrl+Shift+X).</li>
+                                <li>Na barra de pesquisa, procure por <code>SFTP</code>.</li>
+                                <li>Instale a extensão publicada por <strong>Natizyskunk</strong>.</li>
+                            </ol>
+                            <p class="mt-4 text-slate-600 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded"><strong>Ação Necessária:</strong> Se já tinha a versão antiga da extensão (do autor liximomo), deve desinstalá-la para evitar conflitos.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 2: Configuração da Ligação ao Servidor</h3>
+                             <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
+                                <li>Certifique-se de que tem a pasta do seu projeto local aberta no VS Code.</li>
+                                <li>Abra a Paleta de Comandos com <strong>Ctrl+Shift+P</strong>.</li>
+                                <li>Escreva <code>SFTP: Config</code> e pressione Enter.</li>
+                                <li>Isto irá criar e abrir o ficheiro <code>.vscode/sftp.json</code> no seu projeto.</li>
+                             </ol>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 3: Preencher os Detalhes da Ligação em `sftp.json`</h3>
+                            <p class="mt-1 mb-4 text-slate-600">Este ficheiro JSON contém os dados da sua ligação. Use o exemplo apropriado abaixo.</p>
+                            
+                            <h4 class="text-lg font-medium text-slate-800 mt-6">Exemplo para uma ligação SFTP (Recomendado):</h4>
+                            <pre><code>{
+    "name": "Meu Servidor SFTP",
+    "host": "ssh.meusite.com",
+    "protocol": "sftp",
+    "port": 22,
+    "username": "o_seu_utilizador_ssh",
+    "password": "a_sua_password_aqui",
+    "remotePath": "/var/www/meusite/",
+    "uploadOnSave": true
+}</code></pre>
+
+                            <h4 class="text-lg font-medium text-slate-800 mt-6">Exemplo para uma ligação FTP (Menos Seguro):</h4>
+                            <pre><code>{
+    "name": "Meu Servidor FTP",
+    "host": "ftp.meusite.com",
+    "protocol": "ftp",
+    "port": 21,
+    "username": "o_seu_utilizador_ftp",
+    "password": "a_sua_password_aqui",
+    "remotePath": "/public_html/",
+    "uploadOnSave": true
+}</code></pre>
+                            <p class="mt-4 mb-2 text-slate-600 font-medium">Explicação das Configurações:</p>
+                            <ul class="list-disc list-inside text-slate-600 mt-2 space-y-1">
+                                <li><code>"name"</code>: Um nome à sua escolha para identificar a ligação.</li>
+                                <li><code>"host"</code>: O endereço do seu servidor (IP ou domínio).</li>
+                                <li><code>"protocol"</code>: Defina como "ftp" ou "sftp".</li>
+                                <li><code>"port"</code>: A porta correta (normalmente 21 para FTP, 22 para SFTP).</li>
+                                <li><code>"username"</code>: O seu nome de utilizador.</li>
+                                <li><code>"password"</code>: A sua senha. (Para mais segurança, pode apagar esta linha e a extensão irá pedi-la sempre que se ligar).</li>
+                                <li><code>"remotePath"</code>: A pasta de destino no servidor (ex: /public_html/).</li>
+                                <li><code>"uploadOnSave"</code>: Se <code>true</code>, envia o ficheiro automaticamente sempre que o guarda.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 4: O Fluxo de Trabalho Diário</h3>
+                            <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
+                                <li>Na barra de atividade esquerda, clique no novo ícone do SFTP.</li>
+                                <li>Clique com o botão direito no nome do seu servidor e escolha <strong>Connect</strong> para ver os ficheiros remotos.</li>
+                                <li>Clique num ficheiro remoto para o abrir e editar.</li>
+                                <li>Quando guardar (Ctrl+S), o ficheiro será enviado automaticamente para o servidor.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="step14">
                     <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Final: Comandos Comuns do Sail e Alias</h2>
                     <p class="mb-4 text-slate-700">Para simplificar o uso do Sail, crie um alias. Adicione o seguinte ao seu `~/.zshrc` (ou `~/.bashrc`):</p>
                     <pre><code>alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'</code></pre>
@@ -479,5 +557,4 @@ php artisan sail:install</code></pre>
     </script>
 </body>
 </html>
-
 
