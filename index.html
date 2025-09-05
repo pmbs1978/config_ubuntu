@@ -58,15 +58,16 @@
                 <a href="#step1" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 1: Atualizar o Sistema</a>
                 <a href="#step2" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 2: Configs Iniciais</a>
                 <a href="#step3" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 3: Ferramentas Essenciais</a>
-                <a href="#step4" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 4: Terminal (Opcional)</a>
-                <a href="#step5" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 5: PHP</a>
-                <a href="#step6" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 6: Composer</a>
-                <a href="#step7" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 7: Node.js (NVM)</a>
-                <a href="#step8" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 8: Docker</a>
-                <a href="#step9" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 9: Projeto Laravel</a>
-                <a href="#step10" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 10: Laravel Sail</a>
-                <a href="#step11" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 11: VS Code</a>
-                <a href="#step12" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Final: Alias do Sail</a>
+                <a href="#step4" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 4: Usar Git e GitHub</a>
+                <a href="#step5" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 5: Terminal (Opcional)</a>
+                <a href="#step6" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 6: PHP</a>
+                <a href="#step7" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 7: Composer</a>
+                <a href="#step8" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 8: Node.js (NVM)</a>
+                <a href="#step9" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 9: Docker</a>
+                <a href="#step10" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 10: Projeto Laravel</a>
+                <a href="#step11" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 11: Laravel Sail</a>
+                <a href="#step12" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 12: VS Code</a>
+                <a href="#step13" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Final: Alias do Sail</a>
             </nav>
         </aside>
 
@@ -154,9 +155,67 @@ chmod +x pia-linux-*.run
                         </div>
                     </div>
                 </section>
-                
+
                 <section id="step4">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 4: Melhorar o Terminal (Opcional)</h2>
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 4: Fluxo de Trabalho Essencial com Git e GitHub</h2>
+                    <p class="mb-6 text-slate-700">Depois de instalar o Git, este é o fluxo de trabalho básico para clonar, receber e enviar alterações para um repositório no GitHub.</p>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">1. Clonar um Repositório do GitHub</h3>
+                            <p class="mt-1 mb-4 text-slate-600">"Clonar" é o processo de criar uma cópia local exata de um repositório. Na página do repositório no GitHub, clique no botão verde `&lt; &gt; Code` e copie o URL HTTPS.</p>
+                            <pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git</code></pre>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">2. O Fluxo de Trabalho de Sincronização</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="text-lg font-medium text-slate-800">A. Receber Atualizações do GitHub (git pull)</h4>
+                                    <p class="mt-1 mb-2 text-slate-600">Antes de começar a trabalhar, garanta que a sua cópia local está atualizada.</p>
+                                    <pre><code>cd nome-do-repositorio
+git pull origin main</code></pre>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-slate-800">B. Enviar as Suas Alterações (add, commit, push)</h4>
+                                    <p class="mt-1 mb-2 text-slate-600">Siga estes três passos para enviar as suas modificações.</p>
+                                    <p class="mt-1 mb-2 text-slate-600 font-medium">Adicionar Ficheiros (indicar ao Git o que guardar):</p>
+                                    <pre><code>git add .</code></pre>
+                                    <p class="mt-4 mb-2 text-slate-600 font-medium">Registar as Alterações (criar um "ponto de controlo"):</p>
+                                    <pre><code>git commit -m "Mensagem descritiva, ex: Adiciona a funcionalidade X"</code></pre>
+                                     <p class="mt-4 mb-2 text-slate-600 font-medium">Enviar para o GitHub:</p>
+                                    <pre><code>git push origin main</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-slate-800 mb-3">3. Resolver Erros de Autenticação com PAT</h3>
+                             <p class="mt-1 mb-2 text-slate-600">O GitHub já não aceita senhas para operações no terminal. É necessário usar um Personal Access Token (PAT).</p>
+                             <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded my-4">
+                                <h4 class="font-bold text-red-800">O Erro Comum:</h4>
+                                <pre class="!bg-red-100 !text-red-900 !p-2 !mt-2"><code>remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/...'</code></pre>
+                             </div>
+                             <h4 class="text-lg font-medium text-slate-800 mt-6">Como Criar e Usar um PAT:</h4>
+                             <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
+                                <li>Faça login no GitHub, clique na sua foto de perfil → <b>Settings</b>.</li>
+                                <li>No menu esquerdo, vá a <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Tokens (classic)</b>.</li>
+                                <li>Clique em <b>Generate new token</b> (e depois em "Generate new token (classic)").</li>
+                                <li>Dê um nome, defina uma data de validade e, em <b>Scopes</b>, marque a caixa <b>repo</b>.</li>
+                                <li>Clique em <b>Generate token</b> e <b>copie o token imediatamente</b> para um local seguro.</li>
+                                <li>Volte ao terminal. Quando executar `git push` ou `git pull`, use:
+                                    <ul class="list-disc list-inside ml-6 mt-2">
+                                        <li><b>Username:</b> o seu nome de utilizador do GitHub.</li>
+                                        <li><b>Password:</b> cole o Personal Access Token (PAT).</li>
+                                    </ul>
+                                </li>
+                             </ol>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="step5">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 5: Melhorar o Terminal (Opcional)</h2>
                     <p class="mb-6 text-slate-700">Esta seção é opcional, mas altamente recomendada para uma experiência de terminal mais produtiva e visualmente agradável com Tilix, ZSH e Powerlevel10k.</p>
                     <div class="space-y-6">
                         <div>
@@ -208,15 +267,15 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</code></pre>
                     </div>
                 </section>
 
-                <section id="step5">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 5: Instalar o PHP e Extensões</h2>
+                <section id="step6">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 6: Instalar o PHP e Extensões</h2>
                     <p class="mb-4 text-slate-700">Instalação local do PHP e extensões comuns, úteis para executar o Composer e comandos Artisan iniciais.</p>
                     <pre><code>sudo apt install -y php-cli php-mbstring php-xml php-bcmath php-curl php-zip unzip
 php -v</code></pre>
                 </section>
                 
-                <section id="step6">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 6: Instalar o Composer</h2>
+                <section id="step7">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 7: Instalar o Composer</h2>
                     <p class="mb-4 text-slate-700">Instalação do gestor de dependências do PHP.</p>
                     <pre><code>php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Instalador verificado'; } else { echo 'Instalador corrompido'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -226,8 +285,8 @@ sudo mv composer.phar /usr/local/bin/composer
 composer --version</code></pre>
                 </section>
 
-                <section id="step7">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 7: Instalar o Node.js e NPM (via NVM)</h2>
+                <section id="step8">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 8: Instalar o Node.js e NPM (via NVM)</h2>
                     <p class="mb-4 text-slate-700">Usar o NVM (Node Version Manager) é a melhor abordagem para gerir múltiplas versões do Node.js. Após executar o primeiro comando, feche e reabra o terminal.</p>
                      <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</code></pre>
                      <p class="my-4 text-slate-700">Depois de reabrir o terminal, execute:</p>
@@ -235,8 +294,8 @@ composer --version</code></pre>
 node -v && npm -v</code></pre>
                 </section>
                 
-                <section id="step8">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 8: Instalar o Docker</h2>
+                <section id="step9">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 9: Instalar o Docker</h2>
                      <p class="mb-6 text-slate-700">Instalação do Docker Engine para gerir os contentores do Sail.</p>
                     <div class="space-y-6">
                         <div>
@@ -260,16 +319,16 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
                     </div>
                 </section>
 
-                <section id="step9">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 9: Criar um Novo Projeto Laravel</h2>
+                <section id="step10">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 10: Criar um Novo Projeto Laravel</h2>
                     <p class="mb-4 text-slate-700">Criação de um novo projeto Laravel usando o Composer.</p>
                     <pre><code>mkdir -p ~/seus-projetos
 cd ~/seus-projetos/
 composer create-project laravel/laravel meu-app-laravel</code></pre>
                 </section>
 
-                <section id="step10">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 10: Configurar e Usar o Laravel Sail</h2>
+                <section id="step11">
+                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 11: Configurar e Usar o Laravel Sail</h2>
                     <p class="mb-4 text-slate-700">O Sail é uma interface de linha de comando para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.</p>
                     <pre><code>cd meu-app-laravel
 composer require laravel/sail --dev
@@ -278,8 +337,8 @@ php artisan sail:install</code></pre>
                     <pre><code>./vendor/bin/sail up -d</code></pre>
                 </section>
                 
-                <section id="step11">
-                     <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 11: Instalar e Configurar o Visual Studio Code</h2>
+                <section id="step12">
+                     <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 12: Instalar e Configurar o Visual Studio Code</h2>
                      <p class="mb-6 text-slate-700">Instalação do VS Code e configuração de extensões recomendadas para desenvolvimento Laravel.</p>
                      <div class="space-y-6">
                         <div>
@@ -330,7 +389,7 @@ php artisan sail:install</code></pre>
                      </div>
                 </section>
 
-                <section id="step12">
+                <section id="step13">
                     <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Final: Comandos Comuns do Sail e Alias</h2>
                     <p class="mb-4 text-slate-700">Para simplificar o uso do Sail, crie um alias. Adicione o seguinte ao seu `~/.zshrc` (ou `~/.bashrc`):</p>
                     <pre><code>alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'</code></pre>
@@ -405,8 +464,4 @@ php artisan sail:install</code></pre>
     </script>
 </body>
 </html>
-
-
-
-
 
