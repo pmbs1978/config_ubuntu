@@ -210,6 +210,21 @@ fatal: Authentication failed for 'https://github.com/...'</code></pre>
                                     </ul>
                                 </li>
                              </ol>
+                             <h4 class="text-lg font-medium text-slate-800 mt-8">Como Guardar o Token no Linux</h4>
+                             <p class="mt-2 mb-4 text-slate-600">Para não ter de inserir o token sempre, pode guardá-lo em cache ou de forma permanente.</p>
+                             <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-semibold text-slate-700">1. Guardar em cache por um tempo (Recomendado)</h5>
+                                    <p class="mt-1 mb-2 text-slate-600">Guarda o token na memória por um período (ex: 1 hora). É mais seguro.</p>
+                                    <pre><code>git config --global credential.helper 'cache --timeout=3600'</code></pre>
+                                    <p class="mt-2 text-sm text-slate-500">Pode aumentar o 3600 para mais segundos (ex: 86400 para 24 horas).</p>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-slate-700">2. Guardar permanentemente (Menos seguro)</h5>
+                                    <p class="mt-1 mb-2 text-slate-600">Guarda o token num ficheiro de texto simples na sua pasta pessoal. É mais conveniente, mas menos seguro.</p>
+                                     <pre><code>git config --global credential.helper store</code></pre>
+                                </div>
+                             </div>
                         </div>
                     </div>
                 </section>
@@ -464,4 +479,5 @@ php artisan sail:install</code></pre>
     </script>
 </body>
 </html>
+
 
