@@ -164,16 +164,21 @@ chmod +x pia-linux-*.run
                              <pre><code>sudo apt install -y tilix</code></pre>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">2. Instalar ZSH e Fontes</h3>
-                             <pre><code>sudo apt install -y zsh fonts-firacode</code></pre>
+                            <h3 class="text-lg font-medium text-slate-800">2. Instalar a Fonte Fira Code</h3>
+                            <p class="mt-1 mb-2 text-slate-600">Fira Code é uma fonte popular para programação que suporta "ligatures", que combinam múltiplos caracteres em um único símbolo (ex: `=>` torna-se `⇒`). É ótima para o terminal e para o VS Code.</p>
+                             <pre><code>sudo apt install -y fonts-firacode</code></pre>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">3. Instalar Oh My Zsh</h3>
+                            <h3 class="text-lg font-medium text-slate-800">3. Instalar ZSH</h3>
+                             <pre><code>sudo apt install -y zsh</code></pre>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-slate-800">4. Instalar Oh My Zsh</h3>
                             <p class="mt-1 mb-2 text-slate-600">Quando perguntado, confirme que deseja tornar o ZSH o seu shell padrão.</p>
                              <pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">4. Instalar as Fontes MesloLGS NF</h3>
+                            <h3 class="text-lg font-medium text-slate-800">5. Instalar as Fontes MesloLGS NF</h3>
                             <p class="mt-1 mb-2 text-slate-600">Estas fontes são essenciais para os ícones do Powerlevel10k. Depois de instalar, **configure a fonte do seu terminal (Tilix) para `MesloLGS NF Regular`**.</p>
                              <pre><code>mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
@@ -185,16 +190,16 @@ cd ~
 fc-cache -f -v</code></pre>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">5. Instalar o tema Powerlevel10k</h3>
+                            <h3 class="text-lg font-medium text-slate-800">6. Instalar o tema Powerlevel10k</h3>
                             <pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</code></pre>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">6. Instalar Plugins (Sugestões e Destaques)</h3>
+                            <h3 class="text-lg font-medium text-slate-800">7. Instalar Plugins (Sugestões e Destaques)</h3>
                              <pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
                         </div>
                         <div>
-                             <h3 class="text-lg font-medium text-slate-800">7. Configurar `~/.zshrc`</h3>
+                             <h3 class="text-lg font-medium text-slate-800">8. Configurar `~/.zshrc`</h3>
                             <p class="mt-1 mb-2 text-slate-600">Abra `~/.zshrc` e edite as seguintes linhas:</p>
                             <pre><code>ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</code></pre>
@@ -298,8 +303,11 @@ php artisan sail:install</code></pre>
                         </div>
                         <div>
                             <h3 class="text-lg font-medium text-slate-800">3. Configurações (`settings.json`)</h3>
-                             <p class="mt-1 mb-2 text-slate-600">Pressione `Ctrl+Shift+P`, procure por `Open User Settings (JSON)` e adicione as seguintes configurações:</p>
+                             <p class="mt-1 mb-2 text-slate-600">Pressione `Ctrl+Shift+P`, procure por `Open User Settings (JSON)` e adicione as seguintes configurações para otimizar o seu ambiente:</p>
                              <pre><code>{
+    "files.autoSave": "onFocusChange",
+    "editor.fontFamily": "'Fira Code', monospace",
+    "editor.fontLigatures": true,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[php]": {
@@ -311,6 +319,10 @@ php artisan sail:install</code></pre>
     },
     "terminal.integrated.fontFamily": "MesloLGS NF"
 }</code></pre>
+                             <ul class="list-disc list-inside text-slate-600 mt-4 space-y-1">
+                                 <li><b>files.autoSave:</b> Guarda os ficheiros automaticamente sempre que muda de janela ou de ficheiro.</li>
+                                 <li><b>editor.fontFamily & fontLigatures:</b> Define a Fira Code como fonte padrão do editor e ativa as "ligatures" para uma melhor experiência de leitura de código.</li>
+                             </ul>
                         </div>
                      </div>
                 </section>
@@ -390,4 +402,6 @@ php artisan sail:install</code></pre>
     </script>
 </body>
 </html>
+
+
 
