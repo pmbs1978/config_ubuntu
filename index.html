@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guia Interativo de Configuração Ubuntu para Laravel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chosen Palette: Light Slate & Indigo -->
@@ -10,252 +10,564 @@
     <!-- Visualization & Content Choices: Report Info: Step-by-step technical commands and explanations. -> Goal: Inform and enable action (running commands). -> Viz/Presentation Method: Structured HTML sections with styled code blocks, lists, and contextual notes. -> Interaction: Sidebar with smooth-scrolling navigation and active-state highlighting (scroll spy), plus 'copy' buttons for all code snippets. -> Justification: This design enhances usability by breaking down dense information into a navigable interface and streamlines the developer's workflow with one-click command copying. -> Library/Method: HTML, Tailwind CSS for styling, and Vanilla JavaScript for interactivity (scroll spy, copy functionality). No charting libraries needed. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        .active-nav {
-            color: #4f46e5;
-            background-color: #eef2ff;
-            font-weight: 600;
-        }
-        pre {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            position: relative;
-            overflow-x: auto;
-        }
-        code {
-            font-family: 'Fira Code', monospace;
-        }
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background-color: #334155;
-            color: #cbd5e1;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.2s ease-in-out;
-        }
-        .copy-btn:hover {
-            background-color: #475569;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+      .active-nav {
+        color: #4f46e5;
+        background-color: #eef2ff;
+        font-weight: 600;
+      }
+      pre {
+        background-color: #1e293b;
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        position: relative;
+        overflow-x: auto;
+      }
+      code {
+        font-family: "Fira Code", monospace;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background-color: #334155;
+        color: #cbd5e1;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: all 0.2s ease-in-out;
+      }
+      .copy-btn:hover {
+        background-color: #475569;
+      }
     </style>
-</head>
-<body class="bg-slate-50 text-slate-800">
-
+  </head>
+  <body class="bg-slate-50 text-slate-800">
     <div class="flex flex-col md:flex-row min-h-screen">
-        <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 lg:w-72 bg-white md:border-r border-slate-200 p-4 md:p-6 md:fixed md:h-full">
-            <h1 class="text-xl font-bold text-indigo-700 mb-6">Guia de Configuração</h1>
-            <nav id="navigation" class="flex flex-col space-y-2">
-                <a href="#step1" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 1: Atualizar o Sistema</a>
-                <a href="#step2" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 2: Configs Iniciais</a>
-                <a href="#step3" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 3: Ferramentas Essenciais</a>
-                <a href="#step4" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 4: Usar Git e GitHub</a>
-                <a href="#step5" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 5: Terminal (Opcional)</a>
-                <a href="#step6" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 6: PHP</a>
-                <a href="#step7" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 7: Composer</a>
-                <a href="#step8" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 8: Node.js (NVM)</a>
-                <a href="#step9" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 9: Docker</a>
-                <a href="#step10" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 10: Projeto Laravel</a>
-                <a href="#step11" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 11: Laravel Sail</a>
-                <a href="#step12" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 12: VS Code</a>
-                <a href="#step13" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Passo 13: Editar via SFTP no VSCode</a>
-                <a href="#step14" class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors">Final: Alias do Sail</a>
-            </nav>
-        </aside>
+      <!-- Sidebar Navigation -->
+      <aside
+        class="w-full md:w-64 lg:w-72 bg-white md:border-r border-slate-200 p-4 md:p-6 md:fixed md:h-full"
+      >
+        <h1 class="text-xl font-bold text-indigo-700 mb-6">
+          Guia de Configuração
+        </h1>
+        <nav id="navigation" class="flex flex-col space-y-2">
+          <a
+            href="#step1"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 1: Atualizar o Sistema</a
+          >
+          <a
+            href="#step2"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 2: Configs Iniciais</a
+          >
+          <a
+            href="#step3"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 3: Ferramentas Essenciais</a
+          >
+          <a
+            href="#step4"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 4: Usar Git e GitHub</a
+          >
+          <a
+            href="#step5"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 5: Terminal (Opcional)</a
+          >
+          <a
+            href="#step6"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 6: PHP</a
+          >
+          <a
+            href="#step7"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 7: Composer</a
+          >
+          <a
+            href="#step8"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 8: Node.js (NVM)</a
+          >
+          <a
+            href="#step9"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 9: Docker</a
+          >
+          <a
+            href="#step10"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 10: Projeto Laravel</a
+          >
+          <a
+            href="#step11"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 11: Laravel Sail</a
+          >
+          <a
+            href="#step12"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 12: VS Code</a
+          >
+          <a
+            href="#step13"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Passo 13: Editar via SFTP no VSCode</a
+          >
+          <a
+            href="#step14"
+            class="px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-md text-sm font-medium transition-colors"
+            >Final: Alias do Sail</a
+          >
+        </nav>
+      </aside>
 
-        <!-- Main Content -->
-        <main class="flex-1 p-6 md:p-10 md:ml-64 lg:ml-72">
-            <div class="max-w-4xl mx-auto space-y-12">
-                <header class="mb-12">
-                    <h1 class="text-4xl font-bold tracking-tight text-slate-900">Guia Completo: Configurando o Ambiente de Desenvolvimento Laravel no Ubuntu</h1>
-                    <p class="mt-4 text-lg text-slate-600">Este guia interativo detalha o processo de configuração de um ambiente de desenvolvimento completo para projetos Laravel no Ubuntu, utilizando Docker, Sail, VS Code e mais.</p>
-                </header>
-                
-                <section id="step1">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 1: Atualizar o Sistema</h2>
-                    <p class="mb-4 text-slate-700">Primeiro, vamos garantir que todos os pacotes do seu sistema estejam atualizados.</p>
-                    <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
-                </section>
+      <!-- Main Content -->
+      <main class="flex-1 p-6 md:p-10 md:ml-64 lg:ml-72">
+        <div class="max-w-4xl mx-auto space-y-12">
+          <header class="mb-12">
+            <h1 class="text-4xl font-bold tracking-tight text-slate-900">
+              Guia Completo: Configurando o Ambiente de Desenvolvimento Laravel
+              no Ubuntu
+            </h1>
+            <p class="mt-4 text-lg text-slate-600">
+              Este guia interativo detalha o processo de configuração de um
+              ambiente de desenvolvimento completo para projetos Laravel no
+              Ubuntu, utilizando Docker, Sail, VS Code e mais.
+            </p>
+          </header>
 
-                <section id="step2">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 2: Configurações Iniciais do Ubuntu</h2>
-                    <p class="mb-6 text-slate-700">Estas são algumas configurações recomendadas para melhorar a usabilidade e segurança do seu sistema após uma nova instalação.</p>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">1. Ativar Drivers Proprietários</h3>
-                            <p class="mt-1 text-slate-600">Para garantir o melhor desempenho de hardware (especialmente placas gráficas), abra a aplicação "Software & Updates" → "Additional Drivers", selecione o driver testado e aplique as alterações.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">2. Ativar "Minimizar ao Clicar" na Dock</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Permite minimizar uma janela ao clicar no seu ícone na dock.</p>
-                            <pre><code>gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">3. Instalar o GNOME Tweaks (Ajustes)</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Permite personalizar aspetos avançados do ambiente de trabalho.</p>
-                            <pre><code>sudo apt install -y gnome-tweaks</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">4. Ativar o Firewall (UFW)</h3>
-                            <p class="mt-1 mb-2 text-slate-600">É uma boa prática de segurança ativar o firewall. Os comandos abaixo ativam e permitem tráfego web padrão.</p>
-                            <pre><code>sudo ufw enable
+          <section id="step1">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 1: Atualizar o Sistema
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Primeiro, vamos garantir que todos os pacotes do seu sistema
+              estejam atualizados.
+            </p>
+            <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+          </section>
+
+          <section id="step2">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 2: Configurações Iniciais do Ubuntu
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Estas são algumas configurações recomendadas para melhorar a
+              usabilidade e segurança do seu sistema após uma nova instalação.
+            </p>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  1. Ativar Drivers Proprietários
+                </h3>
+                <p class="mt-1 text-slate-600">
+                  Para garantir o melhor desempenho de hardware (especialmente
+                  placas gráficas), abra a aplicação "Software & Updates" →
+                  "Additional Drivers", selecione o driver testado e aplique as
+                  alterações.
+                </p>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  2. Ativar "Minimizar ao Clicar" na Dock
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Permite minimizar uma janela ao clicar no seu ícone na dock.
+                </p>
+                <pre><code>gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  3. Instalar o GNOME Tweaks (Ajustes)
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Permite personalizar aspetos avançados do ambiente de
+                  trabalho.
+                </p>
+                <pre><code>sudo apt install -y gnome-tweaks</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  4. Ativar o Firewall (UFW)
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  É uma boa prática de segurança ativar o firewall. Os comandos
+                  abaixo ativam e permitem tráfego web padrão.
+                </p>
+                <pre><code>sudo ufw enable
 sudo ufw status
 sudo ufw allow http
 sudo ufw allow https</code></pre>
-                        </div>
-                    </div>
-                </section>
+              </div>
+            </div>
+          </section>
 
-                <section id="step3">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 3: Instalação de Ferramentas e Aplicações Essenciais</h2>
-                    <p class="mb-6 text-slate-700">Instalação de um conjunto de ferramentas de linha de comando e aplicações gráficas úteis.</p>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">1. Ferramentas Essenciais de Linha de Comando</h3>
-                            <pre><code>sudo apt install -y curl wget git xz-utils</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">2. Navegador Google Chrome</h3>
-                            <pre><code>wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          <section id="step3">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 3: Instalação de Ferramentas e Aplicações Essenciais
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Instalação de um conjunto de ferramentas de linha de comando e
+              aplicações gráficas úteis.
+            </p>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  1. Ferramentas Essenciais de Linha de Comando
+                </h3>
+                <pre><code>sudo apt install -y curl wget git xz-utils</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  2. Navegador Google Chrome
+                </h3>
+                <pre><code>wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb -y
 rm google-chrome-stable_current_amd64.deb</code></pre>
-                        </div>
-                         <div>
-                            <h3 class="text-lg font-medium text-slate-800">3. Terminal Wave</h3>
-                            <pre><code>bash -c "$(curl -sS https://raw.githubusercontent.com/wavy-term/wavy-term/main/scripts/install.sh)"</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">4. Aplicações de Produtividade e Gráficos</h3>
-                            <pre><code>sudo apt install -y gimp filezilla libreoffice</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">5. Multimédia: VLC e Codecs</h3>
-                            <p class="mt-1 mb-2 text-slate-600 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">Nota: A instalação dos codecs restritos irá pedir que aceite os termos da licença (EULA). Use a tecla Tab para navegar e Enter para confirmar.</p>
-                            <pre><code>sudo apt install -y vlc ubuntu-restricted-extras</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">6. Ferramentas Python: pip e pipx</h3>
-                             <pre><code>sudo apt install -y python3-pip pipx
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  3. Terminal Wave
+                </h3>
+                <pre><code>sudo snap install wave-terminal</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  4. Aplicações de Produtividade e Gráficos
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Instala o editor de imagens GIMP e o cliente FTP FileZilla.
+                </p>
+                <pre><code>sudo apt install -y gimp filezilla</code></pre>
+                <h4 class="text-md font-medium text-slate-800 mt-6">
+                  Instalar o LibreOffice (via Snap)
+                </h4>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Para garantir a versão mais recente e atualizações
+                  automáticas, é recomendado remover a versão pré-instalada (se
+                  existir) e instalar a versão Snap.
+                </p>
+                <p class="mt-1 mb-2 text-slate-600 font-medium">
+                  Primeiro, remova completamente a versão existente:
+                </p>
+                <pre><code>sudo apt purge --autoremove libreoffice* -y</code></pre>
+                <p class="mt-4 mb-2 text-slate-600 font-medium">
+                  Depois, instale a versão Snap:
+                </p>
+                <pre><code>sudo snap install libreoffice</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  5. Multimédia: VLC e Codecs
+                </h3>
+                <h4 class="text-md font-medium text-slate-800 mt-6">
+                  Instalar o VLC (via Snap)
+                </h4>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Instalar o VLC através do Snap garante que tem a versão mais
+                  recente.
+                </p>
+                <pre><code>sudo snap install vlc</code></pre>
+                <h4 class="text-md font-medium text-slate-800 mt-6">
+                  Instalar Codecs Multimédia Adicionais
+                </h4>
+                <p
+                  class="mt-1 mb-2 text-slate-600 bg-blue-50 border-l-4 border-blue-400 p-3 rounded"
+                >
+                  Nota: A instalação dos codecs restritos irá pedir que aceite
+                  os termos da licença (EULA). Use a tecla Tab para navegar e
+                  Enter para confirmar.
+                </p>
+                <pre><code>sudo apt install -y ubuntu-restricted-extras</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  6. Ferramentas Python: pip e pipx
+                </h3>
+                <pre><code>sudo apt install -y python3-pip pipx
 pipx ensurepath</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">7. VPN: Private Internet Access (PIA)</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Aceda à <a href="https://www.privateinternetaccess.com/download/linux-vpn-app/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 hover:underline">página de downloads da PIA</a>, descarregue o instalador (.run) e execute os comandos abaixo na sua pasta de Downloads.</p>
-                             <pre><code>cd ~/Downloads
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  7. VPN: Private Internet Access (PIA)
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Aceda à
+                  <a
+                    href="https://www.privateinternetaccess.com/download/linux-vpn-app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-indigo-600 hover:underline"
+                    >página de downloads da PIA</a
+                  >, descarregue o instalador (.run) e execute os comandos
+                  abaixo na sua pasta de Downloads.
+                </p>
+                <pre><code>cd ~/Downloads
 chmod +x pia-linux-*.run
 ./pia-linux-*.run</code></pre>
-                        </div>
-                    </div>
-                </section>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  8. Instalar o Gemini CLI (Escolha uma opção)
+                </h3>
+                <div class="space-y-4">
+                  <div>
+                    <h5 class="font-semibold text-slate-700">
+                      Opção 1: Via Script (Recomendado para instalação geral)
+                    </h5>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Este método não requer Node.js e instala o CLI diretamente
+                      no sistema.
+                    </p>
+                    <pre><code>curl -sS https://ai.google.dev/assets/cli/install.sh | bash</code></pre>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-slate-700">
+                      Opção 2: Via NPM (Para utilizadores de Node.js)
+                    </h5>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Se prefere gerir ferramentas através do NPM, use este
+                      comando.
+                    </p>
+                    <pre><code>npm install -g @google/gemini-cli</code></pre>
+                  </div>
+                </div>
+                <p class="my-4 text-slate-700">
+                  Após a instalação (com qualquer um dos métodos), reinicie o
+                  terminal e configure a sua chave de API:
+                </p>
+                <pre><code>gemini init</code></pre>
+              </div>
+            </div>
+          </section>
 
-                <section id="step4">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 4: Fluxo de Trabalho Essencial com Git e GitHub</h2>
-                    <p class="mb-6 text-slate-700">Depois de instalar o Git, este é o fluxo de trabalho básico para clonar, receber e enviar alterações para um repositório no GitHub.</p>
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">1. Clonar um Repositório do GitHub</h3>
-                            <p class="mt-1 mb-4 text-slate-600">"Clonar" é o processo de criar uma cópia local exata de um repositório. Na página do repositório no GitHub, clique no botão verde `&lt; &gt; Code` e copie o URL HTTPS.</p>
-                            <pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git</code></pre>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">2. O Fluxo de Trabalho de Sincronização</h3>
-                            <div class="space-y-6">
-                                <div>
-                                    <h4 class="text-lg font-medium text-slate-800">A. Receber Atualizações do GitHub (git pull)</h4>
-                                    <p class="mt-1 mb-2 text-slate-600">Antes de começar a trabalhar, garanta que a sua cópia local está atualizada.</p>
-                                    <pre><code>cd nome-do-repositorio
+          <section id="step4">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 4: Fluxo de Trabalho Essencial com Git e GitHub
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Depois de instalar o Git, este é o fluxo de trabalho básico para
+              clonar, receber e enviar alterações para um repositório no GitHub.
+            </p>
+            <div class="space-y-8">
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  1. Clonar um Repositório do GitHub
+                </h3>
+                <p class="mt-1 mb-4 text-slate-600">
+                  "Clonar" é o processo de criar uma cópia local exata de um
+                  repositório. Na página do repositório no GitHub, clique no
+                  botão verde `&lt; &gt; Code` e copie o URL HTTPS.
+                </p>
+                <pre><code>git clone https://github.com/seu-usuario/seu-repositorio.git</code></pre>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  2. O Fluxo de Trabalho de Sincronização
+                </h3>
+                <div class="space-y-6">
+                  <div>
+                    <h4 class="text-lg font-medium text-slate-800">
+                      A. Receber Atualizações do GitHub (git pull)
+                    </h4>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Antes de começar a trabalhar, garanta que a sua cópia
+                      local está atualizada.
+                    </p>
+                    <pre><code>cd nome-do-repositorio
 git pull origin main</code></pre>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-slate-800">B. Enviar as Suas Alterações (add, commit, push)</h4>
-                                    <p class="mt-1 mb-2 text-slate-600">Siga estes três passos para enviar as suas modificações.</p>
-                                    <p class="mt-1 mb-2 text-slate-600 font-medium">Adicionar Ficheiros (indicar ao Git o que guardar):</p>
-                                    <pre><code>git add .</code></pre>
-                                    <p class="mt-4 mb-2 text-slate-600 font-medium">Registar as Alterações (criar um "ponto de controlo"):</p>
-                                    <pre><code>git commit -m "Mensagem descritiva, ex: Adiciona a funcionalidade X"</code></pre>
-                                     <p class="mt-4 mb-2 text-slate-600 font-medium">Enviar para o GitHub:</p>
-                                    <pre><code>git push origin main</code></pre>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+                  <div>
+                    <h4 class="text-lg font-medium text-slate-800">
+                      B. Enviar as Suas Alterações (add, commit, push)
+                    </h4>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Siga estes três passos para enviar as suas modificações.
+                    </p>
+                    <p class="mt-1 mb-2 text-slate-600 font-medium">
+                      Adicionar Ficheiros (indicar ao Git o que guardar):
+                    </p>
+                    <pre><code>git add .</code></pre>
+                    <p class="mt-4 mb-2 text-slate-600 font-medium">
+                      Registar as Alterações (criar um "ponto de controlo"):
+                    </p>
+                    <pre><code>git commit -m "Mensagem descritiva, ex: Adiciona a funcionalidade X"</code></pre>
+                    <p class="mt-4 mb-2 text-slate-600 font-medium">
+                      Enviar para o GitHub:
+                    </p>
+                    <pre><code>git push origin main</code></pre>
+                  </div>
+                </div>
+              </div>
 
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">3. Resolver Erros de Autenticação com PAT</h3>
-                             <p class="mt-1 mb-2 text-slate-600">O GitHub já não aceita senhas para operações no terminal. É necessário usar um Personal Access Token (PAT).</p>
-                             <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded my-4">
-                                <h4 class="font-bold text-red-800">O Erro Comum:</h4>
-                                <pre class="!bg-red-100 !text-red-900 !p-2 !mt-2"><code>remote: Invalid username or token. Password authentication is not supported for Git operations.
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  3. Resolver Erros de Autenticação com PAT
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  O GitHub já não aceita senhas para operações no terminal. É
+                  necessário usar um Personal Access Token (PAT).
+                </p>
+                <div
+                  class="bg-red-50 border-l-4 border-red-400 p-4 rounded my-4"
+                >
+                  <h4 class="font-bold text-red-800">O Erro Comum:</h4>
+                  <pre
+                    class="!bg-red-100 !text-red-900 !p-2 !mt-2"
+                  ><code>remote: Invalid username or token. Password authentication is not supported for Git operations.
 fatal: Authentication failed for 'https://github.com/...'</code></pre>
-                             </div>
-                             <h4 class="text-lg font-medium text-slate-800 mt-6">Como Criar e Usar um PAT:</h4>
-                             <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
-                                <li>Faça login no GitHub, clique na sua foto de perfil → <b>Settings</b>.</li>
-                                <li>No menu esquerdo, vá a <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Tokens (classic)</b>.</li>
-                                <li>Clique em <b>Generate new token</b> (e depois em "Generate new token (classic)").</li>
-                                <li>Dê um nome, defina uma data de validade e, em <b>Scopes</b>, marque a caixa <b>repo</b>.</li>
-                                <li>Clique em <b>Generate token</b> e <b>copie o token imediatamente</b> para um local seguro.</li>
-                                <li>Volte ao terminal. Quando executar `git push` ou `git pull`, use:
-                                    <ul class="list-disc list-inside ml-6 mt-2">
-                                        <li><b>Username:</b> o seu nome de utilizador do GitHub.</li>
-                                        <li><b>Password:</b> cole o Personal Access Token (PAT).</li>
-                                    </ul>
-                                </li>
-                             </ol>
-                             <h4 class="text-lg font-medium text-slate-800 mt-8">Como Guardar o Token no Linux</h4>
-                             <p class="mt-2 mb-4 text-slate-600">Para não ter de inserir o token sempre, pode guardá-lo em cache ou de forma permanente.</p>
-                             <div class="space-y-4">
-                                <div>
-                                    <h5 class="font-semibold text-slate-700">1. Guardar em cache por um tempo (Recomendado)</h5>
-                                    <p class="mt-1 mb-2 text-slate-600">Guarda o token na memória por um período (ex: 1 hora). É mais seguro.</p>
-                                    <pre><code>git config --global credential.helper 'cache --timeout=3600'</code></pre>
-                                    <p class="mt-2 text-sm text-slate-500">Pode aumentar o 3600 para mais segundos (ex: 86400 para 24 horas).</p>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold text-slate-700">2. Guardar permanentemente (Menos seguro)</h5>
-                                    <p class="mt-1 mb-2 text-slate-600">Guarda o token num ficheiro de texto simples na sua pasta pessoal. É mais conveniente, mas menos seguro.</p>
-                                     <pre><code>git config --global credential.helper store</code></pre>
-                                </div>
-                             </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section id="step5">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 5: Melhorar o Terminal (Opcional)</h2>
-                    <p class="mb-6 text-slate-700">Esta seção é opcional, mas altamente recomendada para uma experiência de terminal mais produtiva e visualmente agradável com Tilix, ZSH e Powerlevel10k.</p>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">1. Instalar o Terminal Tilix</h3>
-                             <pre><code>sudo apt install -y tilix</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">2. Instalar a Fonte Fira Code</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Fira Code é uma fonte popular para programação que suporta "ligatures", que combinam múltiplos caracteres em um único símbolo (ex: `=>` torna-se `⇒`). É ótima para o terminal e para o VS Code.</p>
-                             <pre><code>sudo apt install -y fonts-firacode</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">3. Instalar ZSH</h3>
-                             <pre><code>sudo apt install -y zsh</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">4. Instalar Oh My Zsh</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Quando perguntado, confirme que deseja tornar o ZSH o seu shell padrão.</p>
-                             <pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">5. Instalar as Fontes MesloLGS NF</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Estas fontes são essenciais para os ícones do Powerlevel10k. Depois de instalar, **configure a fonte do seu terminal (Tilix) para `MesloLGS NF Regular`**.</p>
-                             <pre><code>mkdir -p ~/.local/share/fonts
+                </div>
+                <h4 class="text-lg font-medium text-slate-800 mt-6">
+                  Como Criar e Usar um PAT:
+                </h4>
+                <ol
+                  class="list-decimal list-inside text-slate-600 space-y-2 mt-4"
+                >
+                  <li>
+                    Faça login no GitHub, clique na sua foto de perfil →
+                    <b>Settings</b>.
+                  </li>
+                  <li>
+                    No menu esquerdo, vá a <b>Developer settings</b> →
+                    <b>Personal access tokens</b> → <b>Tokens (classic)</b>.
+                  </li>
+                  <li>
+                    Clique em <b>Generate new token</b> (e depois em "Generate
+                    new token (classic)").
+                  </li>
+                  <li>
+                    Dê um nome, defina uma data de validade e, em <b>Scopes</b>,
+                    marque a caixa <b>repo</b>.
+                  </li>
+                  <li>
+                    Clique em <b>Generate token</b> e
+                    <b>copie o token imediatamente</b> para um local seguro.
+                  </li>
+                  <li>
+                    Volte ao terminal. Quando executar `git push` ou `git pull`,
+                    use:
+                    <ul class="list-disc list-inside ml-6 mt-2">
+                      <li>
+                        <b>Username:</b> o seu nome de utilizador do GitHub.
+                      </li>
+                      <li>
+                        <b>Password:</b> cole o Personal Access Token (PAT).
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+                <h4 class="text-lg font-medium text-slate-800 mt-8">
+                  Como Guardar o Token no Linux
+                </h4>
+                <p class="mt-2 mb-4 text-slate-600">
+                  Para não ter de inserir o token sempre, pode guardá-lo em
+                  cache ou de forma permanente.
+                </p>
+                <div class="space-y-4">
+                  <div>
+                    <h5 class="font-semibold text-slate-700">
+                      1. Guardar em cache por um tempo (Recomendado)
+                    </h5>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Guarda o token na memória por um período (ex: 1 hora). É
+                      mais seguro.
+                    </p>
+                    <pre><code>git config --global credential.helper 'cache --timeout=3600'</code></pre>
+                    <p class="mt-2 text-sm text-slate-500">
+                      Pode aumentar o 3600 para mais segundos (ex: 86400 para 24
+                      horas).
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-slate-700">
+                      2. Guardar permanentemente (Menos seguro)
+                    </h5>
+                    <p class="mt-1 mb-2 text-slate-600">
+                      Guarda o token num ficheiro de texto simples na sua pasta
+                      pessoal. É mais conveniente, mas menos seguro.
+                    </p>
+                    <pre><code>git config --global credential.helper store</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="step5">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 5: Melhorar o Terminal (Opcional)
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Esta seção é opcional, mas altamente recomendada para uma
+              experiência de terminal mais produtiva e visualmente agradável com
+              Tilix, ZSH e Powerlevel10k.
+            </p>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  1. Instalar o Terminal Tilix
+                </h3>
+                <pre><code>sudo apt install -y tilix</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  2. Instalar a Fonte Fira Code
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Fira Code é uma fonte popular para programação que suporta
+                  "ligatures", que combinam múltiplos caracteres em um único
+                  símbolo (ex: `=>` torna-se `⇒`). É ótima para o terminal e
+                  para o VS Code.
+                </p>
+                <pre><code>sudo apt install -y fonts-firacode</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  3. Instalar ZSH
+                </h3>
+                <pre><code>sudo apt install -y zsh</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  4. Instalar Oh My Zsh
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Quando perguntado, confirme que deseja tornar o ZSH o seu
+                  shell padrão.
+                </p>
+                <pre><code>sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  5. Instalar as Fontes MesloLGS NF
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Estas fontes são essenciais para os ícones do Powerlevel10k.
+                  Depois de instalar, **configure a fonte do seu terminal
+                  (Tilix) para `MesloLGS NF Regular`**.
+                </p>
+                <pre><code>mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
 curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
 curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
@@ -263,128 +575,225 @@ curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20
 curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 cd ~
 fc-cache -f -v</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">6. Instalar o tema Powerlevel10k</h3>
-                            <pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">7. Instalar Plugins (Sugestões e Destaques)</h3>
-                             <pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  6. Instalar o tema Powerlevel10k
+                </h3>
+                <pre><code>git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  7. Instalar Plugins (Sugestões e Destaques)
+                </h3>
+                <pre><code>git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting</code></pre>
-                        </div>
-                        <div>
-                             <h3 class="text-lg font-medium text-slate-800">8. Configurar `~/.zshrc`</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Abra `~/.zshrc` e edite as seguintes linhas:</p>
-                            <pre><code>ZSH_THEME="powerlevel10k/powerlevel10k"
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  8. Configurar `~/.zshrc`
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Abra `~/.zshrc` e edite as seguintes linhas:
+                </p>
+                <pre><code>ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)</code></pre>
-                             <p class="mt-4 text-slate-600">Feche e reabra o terminal. O assistente de configuração `p10k configure` deve iniciar. Siga os passos para personalizar a aparência.</p>
-                        </div>
-                    </div>
-                </section>
+                <p class="mt-4 text-slate-600">
+                  Feche e reabra o terminal. O assistente de configuração `p10k
+                  configure` deve iniciar. Siga os passos para personalizar a
+                  aparência.
+                </p>
+              </div>
+            </div>
+          </section>
 
-                <section id="step6">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 6: Instalar o PHP e Extensões</h2>
-                    <p class="mb-4 text-slate-700">Instalação local do PHP e extensões comuns, úteis para executar o Composer e comandos Artisan iniciais.</p>
-                    <pre><code>sudo apt install -y php-cli php-mbstring php-xml php-bcmath php-curl php-zip unzip
+          <section id="step6">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 6: Instalar o PHP e Extensões
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Instalação local do PHP e extensões comuns, úteis para executar o
+              Composer e comandos Artisan iniciais.
+            </p>
+            <pre><code>sudo apt install -y php-cli php-mbstring php-xml php-bcmath php-curl php-zip unzip
 php -v</code></pre>
-                </section>
-                
-                <section id="step7">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 7: Instalar o Composer</h2>
-                    <p class="mb-4 text-slate-700">Instalação do gestor de dependências do PHP.</p>
-                    <pre><code>php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          </section>
+
+          <section id="step7">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 7: Instalar o Composer
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Instalação do gestor de dependências do PHP.
+            </p>
+            <pre><code>php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Instalador verificado'; } else { echo 'Instalador corrompido'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
 composer --version</code></pre>
-                </section>
+          </section>
 
-                <section id="step8">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 8: Instalar o Node.js e NPM (via NVM)</h2>
-                    <p class="mb-4 text-slate-700">Usar o NVM (Node Version Manager) é a melhor abordagem para gerir múltiplas versões do Node.js. Após executar o primeiro comando, feche e reabra o terminal.</p>
-                     <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</code></pre>
-                     <p class="my-4 text-slate-700">Depois de reabrir o terminal, execute:</p>
-                     <pre><code>nvm install --lts
+          <section id="step8">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 8: Instalar o Node.js e NPM (via NVM)
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Usar o NVM (Node Version Manager) é a melhor abordagem para gerir
+              múltiplas versões do Node.js. Após executar o primeiro comando,
+              feche e reabra o terminal.
+            </p>
+            <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</code></pre>
+            <p class="my-4 text-slate-700">
+              Depois de reabrir o terminal, execute:
+            </p>
+            <pre><code>nvm install --lts
 node -v && npm -v</code></pre>
-                </section>
-                
-                <section id="step9">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 9: Instalar o Docker</h2>
-                     <p class="mb-6 text-slate-700">Instalação do Docker Engine para gerir os contentores do Sail.</p>
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">1. Configurar o repositório do Docker</h3>
-                             <pre><code>sudo apt-get install -y ca-certificates curl gnupg
+          </section>
+
+          <section id="step9">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 9: Instalar o Docker
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Instalação do Docker Engine para gerir os contentores do Sail.
+            </p>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  1. Configurar o repositório do Docker
+                </h3>
+                <pre><code>sudo apt-get install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null</code></pre>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">2. Instalar o Docker Engine</h3>
-                             <pre><code>sudo apt-get update
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  2. Instalar o Docker Engine
+                </h3>
+                <pre><code>sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></pre>
-                        </div>
-                        <div>
-                             <h3 class="text-lg font-medium text-slate-800">3. Adicionar o seu usuário ao grupo `docker`</h3>
-                            <p class="mt-1 mb-2 text-slate-600 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">Importante: Faça logout e login novamente no sistema para que a alteração de grupo tenha efeito.</p>
-                            <pre><code>sudo usermod -aG docker $USER</code></pre>
-                        </div>
-                    </div>
-                </section>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  3. Adicionar o seu usuário ao grupo `docker`
+                </h3>
+                <p
+                  class="mt-1 mb-2 text-slate-600 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded"
+                >
+                  Importante: Faça logout e login novamente no sistema para que
+                  a alteração de grupo tenha efeito.
+                </p>
+                <pre><code>sudo usermod -aG docker $USER</code></pre>
+              </div>
+            </div>
+          </section>
 
-                <section id="step10">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 10: Criar um Novo Projeto Laravel</h2>
-                    <p class="mb-4 text-slate-700">Criação de um novo projeto Laravel usando o Composer.</p>
-                    <pre><code>mkdir -p ~/seus-projetos
+          <section id="step10">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 10: Criar um Novo Projeto Laravel
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Criação de um novo projeto Laravel usando o Composer.
+            </p>
+            <pre><code>mkdir -p ~/seus-projetos
 cd ~/seus-projetos/
 composer create-project laravel/laravel meu-app-laravel</code></pre>
-                </section>
+          </section>
 
-                <section id="step11">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 11: Configurar e Usar o Laravel Sail</h2>
-                    <p class="mb-4 text-slate-700">O Sail é uma interface de linha de comando para interagir com o ambiente de desenvolvimento Docker padrão do Laravel.</p>
-                    <pre><code>cd meu-app-laravel
+          <section id="step11">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 11: Configurar e Usar o Laravel Sail
+            </h2>
+            <p class="mb-4 text-slate-700">
+              O Sail é uma interface de linha de comando para interagir com o
+              ambiente de desenvolvimento Docker padrão do Laravel.
+            </p>
+            <pre><code>cd meu-app-laravel
 composer require laravel/sail --dev
 php artisan sail:install</code></pre>
-                    <p class="my-4 text-slate-700">Após selecionar os serviços (ex: mysql, redis), inicie os contentores:</p>
-                    <pre><code>./vendor/bin/sail up -d</code></pre>
-                </section>
-                
-                <section id="step12">
-                     <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 12: Instalar e Configurar o Visual Studio Code</h2>
-                     <p class="mb-6 text-slate-700">Instalação do VS Code e configuração de extensões recomendadas para desenvolvimento Laravel.</p>
-                     <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">1. Instalar o VS Code</h3>
-                             <pre><code>sudo snap install --classic code</code></pre>
-                        </div>
-                        <div>
-                             <h3 class="text-lg font-medium text-slate-800">2. Extensões Recomendadas</h3>
-                            <p class="mt-1 mb-2 text-slate-600">Abra a aba de Extensões (Ctrl+Shift+X) no VS Code e instale:</p>
-                            <ul class="list-disc list-inside text-slate-600 space-y-1">
-                                <li>PHP Intelephense (`bmewburn.vscode-intelephense-client`)</li>
-                                <li>Laravel Blade Snippets (`onecentlin.laravel-blade`)</li>
-                                <li>Laravel Extra Intellisense (`amiralizadeh9480.laravel-extra-intellisense`)</li>
-                                <li>Laravel Go To View (`codingyu.laravel-goto-view`)</li>
-                                <li>Docker (`ms-azuretools.vscode-docker`)</li>
-                                <li>Dev Containers (`ms-vscode-remote.remote-containers`)</li>
-                                <li>GitHub Copilot (`GitHub.copilot`)</li>
-                                <li>GitHub Pull Requests and Issues (`GitHub.vscode-pull-request-github`)</li>
-                                <li>Material Icon Theme (`PKief.material-icon-theme`)</li>
-                                <li>DotENV (`mikestead.dotenv`)</li>
-                                <li>Prettier (`esbenp.prettier-vscode`)</li>
-                                <li>Tailwind CSS IntelliSense (`bradlc.vscode-tailwindcss`)</li>
-                                <li>Live Server (`ritwickdey.liveserver`)</li>
-                                <li>CSS Formatter (`aeschli.vscode-css-formatter`)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium text-slate-800">3. Configurações (`settings.json`)</h3>
-                             <p class="mt-1 mb-2 text-slate-600">Pressione `Ctrl+Shift+P`, procure por `Open User Settings (JSON)` e adicione as seguintes configurações para otimizar o seu ambiente:</p>
-                             <pre><code>{
+            <p class="my-4 text-slate-700">
+              Após selecionar os serviços (ex: mysql, redis), inicie os
+              contentores:
+            </p>
+            <pre><code>./vendor/bin/sail up -d</code></pre>
+          </section>
+
+          <section id="step12">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 12: Instalar e Configurar o Visual Studio Code
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Instalação do VS Code e configuração de extensões recomendadas
+              para desenvolvimento Laravel.
+            </p>
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  1. Instalar o VS Code
+                </h3>
+                <pre><code>sudo snap install --classic code</code></pre>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  2. Extensões Recomendadas
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Abra a aba de Extensões (Ctrl+Shift+X) no VS Code e instale:
+                </p>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                  <li>
+                    PHP Intelephense (`bmewburn.vscode-intelephense-client`)
+                  </li>
+                  <li>Laravel Blade Snippets (`onecentlin.laravel-blade`)</li>
+                  <li>
+                    Laravel Extra Intellisense
+                    (`amiralizadeh9480.laravel-extra-intellisense`)
+                  </li>
+                  <li>Laravel Go To View (`codingyu.laravel-goto-view`)</li>
+                  <li>Docker (`ms-azuretools.vscode-docker`)</li>
+                  <li>Dev Containers (`ms-vscode-remote.remote-containers`)</li>
+                  <li>GitHub Copilot (`GitHub.copilot`)</li>
+                  <li>
+                    GitHub Pull Requests and Issues
+                    (`GitHub.vscode-pull-request-github`)
+                  </li>
+                  <li>Material Icon Theme (`PKief.material-icon-theme`)</li>
+                  <li>DotENV (`mikestead.dotenv`)</li>
+                  <li>Prettier (`esbenp.prettier-vscode`)</li>
+                  <li>
+                    Tailwind CSS IntelliSense (`bradlc.vscode-tailwindcss`)
+                  </li>
+                  <li>Live Server (`ritwickdey.liveserver`)</li>
+                  <li>CSS Formatter (`aeschli.vscode-css-formatter`)</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-lg font-medium text-slate-800">
+                  3. Configurações (`settings.json`)
+                </h3>
+                <p class="mt-1 mb-2 text-slate-600">
+                  Pressione `Ctrl+Shift+P`, procure por `Open User Settings
+                  (JSON)` e adicione as seguintes configurações para otimizar o
+                  seu ambiente:
+                </p>
+                <pre><code>{
     "files.autoSave": "onFocusChange",
     "editor.fontFamily": "'Fira Code', monospace",
     "editor.fontLigatures": true,
@@ -399,45 +808,96 @@ php artisan sail:install</code></pre>
     },
     "terminal.integrated.fontFamily": "MesloLGS NF"
 }</code></pre>
-                             <ul class="list-disc list-inside text-slate-600 mt-4 space-y-1">
-                                 <li><b>files.autoSave:</b> Guarda os ficheiros automaticamente sempre que muda de janela ou de ficheiro.</li>
-                                 <li><b>editor.fontFamily & fontLigatures:</b> Define a Fira Code como fonte padrão do editor e ativa as "ligatures" para uma melhor experiência de leitura de código.</li>
-                             </ul>
-                        </div>
-                     </div>
-                </section>
+                <ul class="list-disc list-inside text-slate-600 mt-4 space-y-1">
+                  <li>
+                    <b>files.autoSave:</b> Guarda os ficheiros automaticamente
+                    sempre que muda de janela ou de ficheiro.
+                  </li>
+                  <li>
+                    <b>editor.fontFamily & fontLigatures:</b> Define a Fira Code
+                    como fonte padrão do editor e ativa as "ligatures" para uma
+                    melhor experiência de leitura de código.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
 
-                <section id="step13">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Passo 13: Tutorial: Editar Ficheiros via FTP/SFTP no VS Code</h2>
-                    <p class="mb-6 text-slate-700">Trabalhar diretamente em ficheiros num servidor remoto a partir do Visual Studio Code é uma das formas mais eficientes de desenvolver para a web.</p>
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 1: Instalação da Extensão Correta</h3>
-                            <p class="mt-1 mb-4 text-slate-600">A extensão "SFTP" mais popular (do autor liximomo) foi descontinuada. Este tutorial utiliza a sua sucessora, publicada pelo autor <strong>Natizyskunk</strong>.</p>
-                            <ol class="list-decimal list-inside text-slate-600 space-y-2">
-                                <li>Abra o VS Code e aceda à vista de Extensões (Ctrl+Shift+X).</li>
-                                <li>Na barra de pesquisa, procure por <code>SFTP</code>.</li>
-                                <li>Instale a extensão publicada por <strong>Natizyskunk</strong>.</li>
-                            </ol>
-                            <p class="mt-4 text-slate-600 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded"><strong>Ação Necessária:</strong> Se já tinha a versão antiga da extensão (do autor liximomo), deve desinstalá-la para evitar conflitos.</p>
-                        </div>
-                        
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 2: Configuração da Ligação ao Servidor</h3>
-                             <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
-                                <li>Certifique-se de que tem a pasta do seu projeto local aberta no VS Code.</li>
-                                <li>Abra a Paleta de Comandos com <strong>Ctrl+Shift+P</strong>.</li>
-                                <li>Escreva <code>SFTP: Config</code> e pressione Enter.</li>
-                                <li>Isto irá criar e abrir o ficheiro <code>.vscode/sftp.json</code> no seu projeto.</li>
-                             </ol>
-                        </div>
+          <section id="step13">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Passo 13: Tutorial: Editar Ficheiros via FTP/SFTP no VS Code
+            </h2>
+            <p class="mb-6 text-slate-700">
+              Trabalhar diretamente em ficheiros num servidor remoto a partir do
+              Visual Studio Code é uma das formas mais eficientes de desenvolver
+              para a web.
+            </p>
+            <div class="space-y-8">
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  Parte 1: Instalação da Extensão Correta
+                </h3>
+                <p class="mt-1 mb-4 text-slate-600">
+                  A extensão "SFTP" mais popular (do autor liximomo) foi
+                  descontinuada. Este tutorial utiliza a sua sucessora,
+                  publicada pelo autor <strong>Natizyskunk</strong>.
+                </p>
+                <ol class="list-decimal list-inside text-slate-600 space-y-2">
+                  <li>
+                    Abra o VS Code e aceda à vista de Extensões (Ctrl+Shift+X).
+                  </li>
+                  <li>Na barra de pesquisa, procure por <code>SFTP</code>.</li>
+                  <li>
+                    Instale a extensão publicada por
+                    <strong>Natizyskunk</strong>.
+                  </li>
+                </ol>
+                <p
+                  class="mt-4 text-slate-600 bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded"
+                >
+                  <strong>Ação Necessária:</strong> Se já tinha a versão antiga
+                  da extensão (do autor liximomo), deve desinstalá-la para
+                  evitar conflitos.
+                </p>
+              </div>
 
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 3: Preencher os Detalhes da Ligação em `sftp.json`</h3>
-                            <p class="mt-1 mb-4 text-slate-600">Este ficheiro JSON contém os dados da sua ligação. Use o exemplo apropriado abaixo.</p>
-                            
-                            <h4 class="text-lg font-medium text-slate-800 mt-6">Exemplo para uma ligação SFTP (Recomendado):</h4>
-                            <pre><code>{
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  Parte 2: Configuração da Ligação ao Servidor
+                </h3>
+                <ol
+                  class="list-decimal list-inside text-slate-600 space-y-2 mt-4"
+                >
+                  <li>
+                    Certifique-se de que tem a pasta do seu projeto local aberta
+                    no VS Code.
+                  </li>
+                  <li>
+                    Abra a Paleta de Comandos com <strong>Ctrl+Shift+P</strong>.
+                  </li>
+                  <li>Escreva <code>SFTP: Config</code> e pressione Enter.</li>
+                  <li>
+                    Isto irá criar e abrir o ficheiro
+                    <code>.vscode/sftp.json</code> no seu projeto.
+                  </li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  Parte 3: Preencher os Detalhes da Ligação em `sftp.json`
+                </h3>
+                <p class="mt-1 mb-4 text-slate-600">
+                  Este ficheiro JSON contém os dados da sua ligação. Use o
+                  exemplo apropriado abaixo.
+                </p>
+
+                <h4 class="text-lg font-medium text-slate-800 mt-6">
+                  Exemplo para uma ligação SFTP (Recomendado):
+                </h4>
+                <pre><code>{
     "name": "Meu Servidor SFTP",
     "host": "ssh.meusite.com",
     "protocol": "sftp",
@@ -448,8 +908,10 @@ php artisan sail:install</code></pre>
     "uploadOnSave": true
 }</code></pre>
 
-                            <h4 class="text-lg font-medium text-slate-800 mt-6">Exemplo para uma ligação FTP (Menos Seguro):</h4>
-                            <pre><code>{
+                <h4 class="text-lg font-medium text-slate-800 mt-6">
+                  Exemplo para uma ligação FTP (Menos Seguro):
+                </h4>
+                <pre><code>{
     "name": "Meu Servidor FTP",
     "host": "ftp.meusite.com",
     "protocol": "ftp",
@@ -459,105 +921,155 @@ php artisan sail:install</code></pre>
     "remotePath": "/public_html/",
     "uploadOnSave": true
 }</code></pre>
-                            <p class="mt-4 mb-2 text-slate-600 font-medium">Explicação das Configurações:</p>
-                            <ul class="list-disc list-inside text-slate-600 mt-2 space-y-1">
-                                <li><code>"name"</code>: Um nome à sua escolha para identificar a ligação.</li>
-                                <li><code>"host"</code>: O endereço do seu servidor (IP ou domínio).</li>
-                                <li><code>"protocol"</code>: Defina como "ftp" ou "sftp".</li>
-                                <li><code>"port"</code>: A porta correta (normalmente 21 para FTP, 22 para SFTP).</li>
-                                <li><code>"username"</code>: O seu nome de utilizador.</li>
-                                <li><code>"password"</code>: A sua senha. (Para mais segurança, pode apagar esta linha e a extensão irá pedi-la sempre que se ligar).</li>
-                                <li><code>"remotePath"</code>: A pasta de destino no servidor (ex: /public_html/).</li>
-                                <li><code>"uploadOnSave"</code>: Se <code>true</code>, envia o ficheiro automaticamente sempre que o guarda.</li>
-                            </ul>
-                        </div>
+                <p class="mt-4 mb-2 text-slate-600 font-medium">
+                  Explicação das Configurações:
+                </p>
+                <ul class="list-disc list-inside text-slate-600 mt-2 space-y-1">
+                  <li>
+                    <code>"name"</code>: Um nome à sua escolha para identificar
+                    a ligação.
+                  </li>
+                  <li>
+                    <code>"host"</code>: O endereço do seu servidor (IP ou
+                    domínio).
+                  </li>
+                  <li><code>"protocol"</code>: Defina como "ftp" ou "sftp".</li>
+                  <li>
+                    <code>"port"</code>: A porta correta (normalmente 21 para
+                    FTP, 22 para SFTP).
+                  </li>
+                  <li><code>"username"</code>: O seu nome de utilizador.</li>
+                  <li>
+                    <code>"password"</code>: A sua senha. (Para mais segurança,
+                    pode apagar esta linha e a extensão irá pedi-la sempre que
+                    se ligar).
+                  </li>
+                  <li>
+                    <code>"remotePath"</code>: A pasta de destino no servidor
+                    (ex: /public_html/).
+                  </li>
+                  <li>
+                    <code>"uploadOnSave"</code>: Se <code>true</code>, envia o
+                    ficheiro automaticamente sempre que o guarda.
+                  </li>
+                </ul>
+              </div>
 
-                        <div>
-                            <h3 class="text-xl font-semibold text-slate-800 mb-3">Parte 4: O Fluxo de Trabalho Diário</h3>
-                            <ol class="list-decimal list-inside text-slate-600 space-y-2 mt-4">
-                                <li>Na barra de atividade esquerda, clique no novo ícone do SFTP.</li>
-                                <li>Clique com o botão direito no nome do seu servidor e escolha <strong>Connect</strong> para ver os ficheiros remotos.</li>
-                                <li>Clique num ficheiro remoto para o abrir e editar.</li>
-                                <li>Quando guardar (Ctrl+S), o ficheiro será enviado automaticamente para o servidor.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="step14">
-                    <h2 class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4">Final: Comandos Comuns do Sail e Alias</h2>
-                    <p class="mb-4 text-slate-700">Para simplificar o uso do Sail, crie um alias. Adicione o seguinte ao seu `~/.zshrc` (ou `~/.bashrc`):</p>
-                    <pre><code>alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'</code></pre>
-                    <p class="my-4 text-slate-700">Recarregue o terminal (`source ~/.zshrc`) e agora pode usar `sail` em vez de `./vendor/bin/sail`.</p>
-                    <ul class="list-disc list-inside text-slate-700 space-y-2">
-                        <li><b>Iniciar/Parar:</b> `sail up -d` / `sail down`</li>
-                        <li><b>Migrações:</b> `sail artisan migrate`</li>
-                        <li><b>Composer:</b> `sail composer require ...`</li>
-                        <li><b>NPM:</b> `sail npm install && sail npm run dev`</li>
-                    </ul>
-                    <p class="mt-6 text-lg font-medium text-green-700">O seu ambiente de desenvolvimento está configurado e pronto para uso!</p>
-                </section>
+              <div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-3">
+                  Parte 4: O Fluxo de Trabalho Diário
+                </h3>
+                <ol
+                  class="list-decimal list-inside text-slate-600 space-y-2 mt-4"
+                >
+                  <li>
+                    Na barra de atividade esquerda, clique no novo ícone do
+                    SFTP.
+                  </li>
+                  <li>
+                    Clique com o botão direito no nome do seu servidor e escolha
+                    <strong>Connect</strong> para ver os ficheiros remotos.
+                  </li>
+                  <li>Clique num ficheiro remoto para o abrir e editar.</li>
+                  <li>
+                    Quando guardar (Ctrl+S), o ficheiro será enviado
+                    automaticamente para o servidor.
+                  </li>
+                </ol>
+              </div>
             </div>
-        </main>
+          </section>
+
+          <section id="step14">
+            <h2
+              class="text-2xl font-semibold text-slate-900 border-b pb-2 mb-4"
+            >
+              Final: Comandos Comuns do Sail e Alias
+            </h2>
+            <p class="mb-4 text-slate-700">
+              Para simplificar o uso do Sail, crie um alias. Adicione o seguinte
+              ao seu `~/.zshrc` (ou `~/.bashrc`):
+            </p>
+            <pre><code>alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'</code></pre>
+            <p class="my-4 text-slate-700">
+              Recarregue o terminal (`source ~/.zshrc`) e agora pode usar `sail`
+              em vez de `./vendor/bin/sail`.
+            </p>
+            <ul class="list-disc list-inside text-slate-700 space-y-2">
+              <li><b>Iniciar/Parar:</b> `sail up -d` / `sail down`</li>
+              <li><b>Migrações:</b> `sail artisan migrate`</li>
+              <li><b>Composer:</b> `sail composer require ...`</li>
+              <li><b>NPM:</b> `sail npm install && sail npm run dev`</li>
+            </ul>
+            <p class="mt-6 text-lg font-medium text-green-700">
+              O seu ambiente de desenvolvimento está configurado e pronto para
+              uso!
+            </p>
+          </section>
+        </div>
+      </main>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Add copy buttons to all pre tags
-            const allPreTags = document.querySelectorAll('pre');
-            allPreTags.forEach(pre => {
-                const code = pre.querySelector('code');
-                if (code) {
-                    const copyButton = document.createElement('button');
-                    copyButton.className = 'copy-btn';
-                    copyButton.textContent = 'Copiar';
-                    pre.appendChild(copyButton);
+      document.addEventListener("DOMContentLoaded", () => {
+        // Add copy buttons to all pre tags
+        const allPreTags = document.querySelectorAll("pre");
+        allPreTags.forEach((pre) => {
+          const code = pre.querySelector("code");
+          if (code) {
+            const copyButton = document.createElement("button");
+            copyButton.className = "copy-btn";
+            copyButton.textContent = "Copiar";
+            pre.appendChild(copyButton);
 
-                    copyButton.addEventListener('click', () => {
-                        const textToCopy = code.innerText;
-                        
-                        const tempTextarea = document.createElement('textarea');
-                        tempTextarea.value = textToCopy;
-                        document.body.appendChild(tempTextarea);
-                        tempTextarea.select();
-                        try {
-                            document.execCommand('copy');
-                            copyButton.textContent = 'Copiado!';
-                            setTimeout(() => {
-                                copyButton.textContent = 'Copiar';
-                            }, 2000);
-                        } catch (err) {
-                            console.error('Falha ao copiar: ', err);
-                            copyButton.textContent = 'Erro';
-                        }
-                        document.body.removeChild(tempTextarea);
-                    });
-                }
+            copyButton.addEventListener("click", () => {
+              const textToCopy = code.innerText;
+
+              const tempTextarea = document.createElement("textarea");
+              tempTextarea.value = textToCopy;
+              document.body.appendChild(tempTextarea);
+              tempTextarea.select();
+              try {
+                document.execCommand("copy");
+                copyButton.textContent = "Copiado!";
+                setTimeout(() => {
+                  copyButton.textContent = "Copiar";
+                }, 2000);
+              } catch (err) {
+                console.error("Falha ao copiar: ", err);
+                copyButton.textContent = "Erro";
+              }
+              document.body.removeChild(tempTextarea);
             });
-
-            // Scroll Spy for navigation
-            const sections = document.querySelectorAll('main section');
-            const navLinks = document.querySelectorAll('#navigation a');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active-nav');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active-nav');
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+          }
         });
+
+        // Scroll Spy for navigation
+        const sections = document.querySelectorAll("main section");
+        const navLinks = document.querySelectorAll("#navigation a");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  link.classList.remove("active-nav");
+                  if (
+                    link.getAttribute("href").substring(1) === entry.target.id
+                  ) {
+                    link.classList.add("active-nav");
+                  }
+                });
+              }
+            });
+          },
+          { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+        );
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
-
-
