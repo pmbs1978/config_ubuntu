@@ -239,9 +239,14 @@ sudo ufw allow https</code></pre>
                 <h3 class="text-xl font-semibold text-white">
                   1. Ferramentas Essenciais de Linha de Comando
                 </h3>
+                <p class="mt-2 mb-3 text-gray-400">
+                  Instala utilitários fundamentais, incluindo o
+                  <code class="bg-gray-700 px-1 rounded">btop</code>, um monitor
+                  de recursos moderno e interativo.
+                </p>
                 <pre
                   class="mt-3"
-                ><code>sudo apt install -y curl wget git xz-utils</code></pre>
+                ><code>sudo apt install -y curl wget git xz-utils btop</code></pre>
               </div>
               <div>
                 <h3 class="text-xl font-semibold text-white">
@@ -371,33 +376,97 @@ chmod +x pia-linux-*.run
               </div>
               <div>
                 <h3 class="text-xl font-semibold text-white">
-                  8. Instalar o Gemini CLI
+                  8. Instalar o Gemini CLI (Método Recomendado)
                 </h3>
-                <div class="space-y-4 mt-3">
+                <div
+                  class="bg-yellow-900/50 border-l-4 border-yellow-500 p-4 rounded my-4"
+                >
+                  <h4 class="font-bold text-yellow-300">
+                    Contexto Importante:
+                  </h4>
+                  <p class="mt-2 text-yellow-300">
+                    As versões recentes do Ubuntu protegem a instalação de
+                    pacotes Python para não corromper o sistema. A solução
+                    abaixo é a mais segura e recomendada: instalamos a
+                    ferramenta num ambiente virtual isolado e depois criamos um
+                    atalho para que possa ser usada globalmente.
+                  </p>
+                </div>
+                <div class="space-y-6 mt-6">
                   <div>
                     <h5 class="font-semibold text-white">
-                      Opção 1: Via Script (Recomendado)
+                      Passo 1: Criar um Ambiente Virtual Dedicado
                     </h5>
                     <p class="mt-2 mb-3 text-gray-400">
-                      Não requer Node.js e instala o CLI diretamente no sistema.
+                      Primeiro, criamos uma pasta para as nossas ferramentas
+                      Python e, dentro dela, um ambiente isolado para o Gemini
+                      CLI.
                     </p>
-                    <pre><code>curl -sS https://ai.google.dev/assets/cli/install.sh | bash</code></pre>
+                    <pre><code>mkdir -p ~/.local/py-tools
+python3 -m venv ~/.local/py-tools/gemini-cli</code></pre>
                   </div>
                   <div>
                     <h5 class="font-semibold text-white">
-                      Opção 2: Via NPM (Para utilizadores de Node.js)
+                      Passo 2: Instalar o Pacote no Ambiente Virtual
                     </h5>
                     <p class="mt-2 mb-3 text-gray-400">
-                      Se prefere gerir ferramentas através do NPM.
+                      Usamos o `pip` de dentro do nosso novo ambiente para
+                      instalar o pacote de forma segura.
                     </p>
-                    <pre><code>npm install -g @google/gemini-cli</code></pre>
+                    <pre><code>~/.local/py-tools/gemini-cli/bin/pip install google-generativeai</code></pre>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-white">
+                      Passo 3: Criar um Atalho (Link Simbólico)
+                    </h5>
+                    <p class="mt-2 mb-3 text-gray-400">
+                      Este comando cria um "atalho" para a ferramenta `gemini`
+                      numa pasta que o seu sistema já reconhece, tornando o
+                      comando disponível em qualquer lugar do terminal.
+                    </p>
+                    <pre><code>ln -s ~/.local/py-tools/gemini-cli/bin/gemini ~/.local/bin/gemini</code></pre>
+                    <p class="mt-4 text-gray-400">
+                      Pode verificar se funcionou com o comando `gemini
+                      --version`.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-white">
+                      Passo 4: Configurar a sua Chave de API
+                    </h5>
+                    <ol
+                      class="list-decimal list-inside text-gray-400 space-y-2 mt-3 mb-4"
+                    >
+                      <li>
+                        Aceda ao
+                        <a
+                          href="https://aistudio.google.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-blue-400 hover:underline"
+                          >Google AI Studio</a
+                        >.
+                      </li>
+                      <li>
+                        Clique em "<b>Get API key</b>" e depois em "<b
+                          >Create API key in new project</b
+                        >".
+                      </li>
+                      <li>Copie a chave gerada.</li>
+                    </ol>
+                    <p class="mt-2 mb-3 text-gray-400">
+                      Para que a ferramenta funcione, adicione a chave como uma
+                      variável de ambiente. Adicione a seguinte linha ao seu
+                      ficheiro `~/.bashrc` ou `~/.zshrc`:
+                    </p>
+                    <pre><code>export GOOGLE_API_KEY='A_SUA_CHAVE_API_AQUI'</code></pre>
+                    <p class="mt-4 text-gray-400">
+                      Depois de guardar, recarregue a configuração com `source
+                      ~/.zshrc` (ou o ficheiro correspondente), ou simplesmente
+                      feche e reabra o terminal.
+                    </p>
                   </div>
                 </div>
-                <p class="my-4 text-gray-400">
-                  Após a instalação, reinicie o terminal e configure a sua chave
-                  de API:
-                </p>
-                <pre><code>gemini init</code></pre>
               </div>
             </div>
           </section>
@@ -587,9 +656,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
                   4. Instalar as Fontes MesloLGS NF
                 </h3>
                 <p class="mt-2 mb-3 text-gray-400">
-                  Essenciais para os ícones do Powerlevel10k. Depois de
-                  instalar, **configure a fonte do seu terminal para `MesloLGS
-                  NF Regular`**.
+                  Estas fontes são essenciais para que os ícones do tema
+                  Powerlevel10k sejam exibidos corretamente.
                 </p>
                 <pre><code>mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts
@@ -599,6 +667,13 @@ curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20
 curl -L -O https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 cd ~
 fc-cache -f -v</code></pre>
+                <p
+                  class="mt-4 text-gray-300 bg-gray-700 border-l-4 border-blue-400 p-4 rounded"
+                >
+                  <strong>Passo Crítico:</strong> Após a instalação, abra as
+                  preferências do seu terminal (Tilix, Wave, etc.) e defina a
+                  fonte do perfil para <strong>`MesloLGS NF Regular`</strong>.
+                </p>
               </div>
               <div>
                 <h3 class="text-xl font-semibold text-white">
@@ -653,10 +728,12 @@ php -v</code></pre>
             </h2>
             <div class="bg-gray-800 border border-gray-700 p-6 rounded-lg">
               <p class="mb-4 text-gray-400">
-                Instalação do gestor de dependências do PHP.
+                Instalação do gestor de dependências do PHP. Os comandos abaixo
+                descarregam o instalador, verificam a sua integridade de forma
+                segura, executam-no e limpam os ficheiros.
               </p>
               <pre><code>php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Instalador verificado'; } else { echo 'Instalador corrompido'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php -r "$expectedSignature = file_get_contents('https://composer.github.io/installer.sig'); $actualSignature = hash_file('sha384', 'composer-setup.php'); if (hash_equals($expectedSignature, $actualSignature)) { echo 'Instalador verificado com sucesso.'; } else { echo 'ERRO: Assinatura do instalador inválida.'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
@@ -670,18 +747,71 @@ composer --version</code></pre>
             >
               Passo 8: Instalar o Node.js e NPM (via NVM)
             </h2>
-            <div class="bg-gray-800 border border-gray-700 p-6 rounded-lg">
-              <p class="mb-4 text-gray-400">
-                Usar o NVM (Node Version Manager) é a melhor abordagem para
-                gerir múltiplas versões do Node.js. Após executar o primeiro
-                comando, feche e reabra o terminal.
-              </p>
-              <pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</code></pre>
-              <p class="my-4 text-gray-400">
-                Depois de reabrir o terminal, execute:
-              </p>
-              <pre><code>nvm install --lts
-node -v && npm -v</code></pre>
+            <div
+              class="bg-gray-800 border border-gray-700 p-6 rounded-lg space-y-8"
+            >
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  1. Instalar o NVM (Node Version Manager)
+                </h3>
+                <pre class="mt-3"><code>sudo apt update
+sudo apt install curl -y
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  2. Ativar o NVM
+                </h3>
+                <p class="mt-2 mb-3 text-gray-400">
+                  Depois de instalar, tem de recarregar a configuração do seu
+                  shell. Para Bash (padrão):
+                </p>
+                <pre><code>source ~/.bashrc</code></pre>
+                <p class="mt-4 mb-3 text-gray-400">
+                  Se usar Zsh (como configurado no passo opcional):
+                </p>
+                <pre><code>source ~/.zshrc</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  3. Verificar a Instalação do NVM
+                </h3>
+                <pre class="mt-3"><code>nvm --version</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  4. Instalar a Versão 22 do Node.js
+                </h3>
+                <pre class="mt-3"><code>nvm install 22</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  5. Definir a Versão 22 como Padrão
+                </h3>
+                <pre class="mt-3"><code>nvm alias default 22</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  6. Confirmar as Versões
+                </h3>
+                <p class="mt-2 mb-3 text-gray-400">
+                  Verifique se o Node e o NPM foram instalados corretamente.
+                </p>
+                <pre><code>node -v
+npm -v</code></pre>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  Dica: Como Mudar de Versão do Node
+                </h3>
+                <p class="mt-2 mb-3 text-gray-400">
+                  O NVM facilita a gestão de múltiplos projetos. Pode instalar e
+                  alternar entre versões facilmente:
+                </p>
+                <pre><code>nvm install 20   # Instala a versão 20
+nvm use 20       # Muda para a versão 20 (nesta sessão de terminal)
+nvm use 22       # Volta para a versão 22</code></pre>
+              </div>
             </div>
           </section>
 
@@ -724,6 +854,18 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
                   a alteração de grupo tenha efeito.
                 </p>
                 <pre><code>sudo usermod -aG docker $USER</code></pre>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-semibold text-white">
+                  4. Verificar a Instalação do Docker
+                </h3>
+                <p class="mt-2 mb-3 text-gray-400">
+                  Execute o contentor `hello-world` para confirmar que o Docker
+                  está a funcionar corretamente. Deverá ver uma mensagem de
+                  boas-vindas do Docker.
+                </p>
+                <pre><code>docker run hello-world</code></pre>
               </div>
             </div>
           </section>
@@ -791,16 +933,29 @@ php artisan sail:install</code></pre>
                   Abra a aba de Extensões (Ctrl+Shift+X) e instale:
                 </p>
                 <ul class="list-disc list-inside text-gray-400 space-y-1">
-                  <li>PHP Intelephense</li>
-                  <li>Laravel Blade Snippets</li>
-                  <li>Laravel Extra Intellisense</li>
-                  <li>Laravel Go To View</li>
-                  <li>Docker & Dev Containers</li>
-                  <li>GitHub Copilot & Pull Requests</li>
-                  <li>ChatGPT - A Extensão Oficial da OpenAI</li>
-                  <li>Material Icon Theme</li>
-                  <li>DotENV, Prettier, Tailwind CSS IntelliSense</li>
-                  <li>Live Server, CSS Formatter</li>
+                  <li><b>PHP Intelephense</b> (por bmewburn)</li>
+                  <li><b>Laravel Blade Snippets</b> (por onecentlin)</li>
+                  <li>
+                    <b>Laravel Extra Intellisense</b> (por amiralizadeh9480)
+                  </li>
+                  <li><b>Laravel Go To View</b> (por codingyu)</li>
+                  <li><b>Docker</b> (por Microsoft)</li>
+                  <li><b>Dev Containers</b> (por Microsoft)</li>
+                  <li><b>GitHub Copilot</b> (por GitHub)</li>
+                  <li><b>GitHub Pull Requests</b> (por GitHub)</li>
+                  <li><b>Codex – OpenAI’s coding agent</b> (por OpenAI)</li>
+                  <li><b>Material Icon Theme</b> (por PKief)</li>
+                  <li><b>Winter Is Coming Theme</b> (por John Papa)</li>
+                  <li><b>Night Owl</b> (por Sarah Drasner)</li>
+                  <li><b>Tokio Night</b> (por enkia)</li>
+                  <li><b>DotENV</b> (por mikestead)</li>
+                  <li>
+                    <b>Prettier - Code formatter</b> (por
+                    esbenp.prettier-vscode)
+                  </li>
+                  <li><b>Tailwind CSS IntelliSense</b> (por Tailwind Labs)</li>
+                  <li><b>Live Server</b> (por Ritwick Dey)</li>
+                  <li><b>CSS Formatter</b> (por Martin Aeschlimann)</li>
                 </ul>
               </div>
               <div>
